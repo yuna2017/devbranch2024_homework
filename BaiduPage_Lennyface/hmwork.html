@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="search.js"></script>
+    <style>
+        .parent {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .box1{
+            display: inline-block;
+            width: 25px;
+            height: 38px;
+        }
+        .boxSelectTop {
+            display: inline-block;
+            width: 50px;
+            height: 38px;
+            position: relative;
+        }
+        .boxSelectTop a:hover{
+            color:rgb(2, 170, 225);
+        }
+
+        .OnTheTopLine {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            text-decoration: none;
+            color:black;
+            font-size: small;
+        }
+
+        .ForRightTopSpecial{
+            display: flex;
+        }
+        .box2{
+            width: 200px;
+        }
+        .NoBottomLineSpecial{
+            text-decoration: none;
+            color:black;
+        }
+        .circular-img {
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 2px solid black;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .search-input {
+            width: 500px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            outline: none;
+            font-size: 16px;
+        }
+        .search-input:focus {
+            border-color: #006ee4;  /* 设置焦点时的边框颜色 */
+            animation: blink 1s infinite alternate;  /* 设置闪烁效果 */
+        }
+        .search-button {
+            
+            margin-left: 0px;
+            padding: 11px 20px;
+            background-color: #006ee4;
+            color: white;
+            border: none;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .search-image-button {
+            position: absolute;
+            margin-left: 358px;
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+        }
+        .signin{
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+            position: relative;
+            margin-top: 16px;
+            margin-right: 30px;
+            background-color: #006ee4;
+            border-radius: 6px;
+
+        }
+        .signin a{
+            color: aliceblue;
+            display: flex;            /* 让 .signin 成为 flex 容器 */
+            justify-content: center;  /* 水平居中 */
+            align-items: center;      /* 垂直居中 */
+            height: 100%;             /* 使 div 高度撑满，确保居中 */
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .bottom-m{
+            text-align: center;
+            display: inline-block;
+            position: relative;
+            color:darkgray;
+        }
+        .bottom-box{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%; /* 宽度撑满 */
+            color: grey;
+            text-align: center; /* 文字居中 */
+            padding: 10px 0; /* 上下内边距 */
+            font-size: 13px;
+        }
+        .bottom-box a {
+            color:grey;
+            text-decoration: none;
+            margin: 0 5px; /* 每个链接之间的间距 */
+        }
+        .bottom-box a:hover {
+            color: black;
+        }
+        .bottom-box a.no-hover:hover {
+            color: inherit; 
+        }
+        .more-tooltip {
+            position: absolute;
+            bottom: -280px; 
+            left: -160px;
+            width: 200px;
+            background-color: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .boxSelectTop:hover .more-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .more-img{
+            height: 45px;
+            width: 45px;
+        }
+        .more-tooltip-box{
+           display: inline-block;
+           height:70px;
+           width: 60px;
+        }
+        .more-tooltip-box a{
+           font-size: 15px;
+           text-decoration: none;
+           color: black;
+        }
+        .more-tooltip-box-bottom{
+        text-align: center;
+        }
+        .more-tooltip-box-bottom a{
+        color: black;
+        text-decoration: none;
+        }
+        .arrow{
+            display: inline-block;
+        }
+        .arrow-img{
+            height: 15px;
+            width: 15px;
+        }
+        .arrow-window{
+            position: absolute;
+            bottom: 40px; 
+            right: 65px;
+            width: 500px;
+            background-color: white;
+            color: grey;
+            padding: 10px;
+            border-radius: 5px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+           
+        }
+        .arrow-window p{
+            margin-bottom: 2px;
+            margin-top: 2px;
+        }
+        .arrow:hover .arrow-window{
+            visibility: visible;
+            opacity: 1;
+            
+        } 
+    </style>
+    <title>Example</title>
+</head>
+<body style="margin: 0%;">
+<div class="parent">
+    <div>
+         <div class="box1"> 
+         </div>
+         <div class="boxSelectTop">
+             <a href="http://news.baidu.com/" class="OnTheTopLine">新闻</a>
+         </div>
+         <div class="boxSelectTop">
+             <a href="https://www.hao123.com/?src=from_pc_logon" class="OnTheTopLine">hao123</a>
+         </div>
+         <div class="boxSelectTop">
+             <a href="https://www.hao123.com/?src=from_pc_logon" class="OnTheTopLine">地图</a>
+         </div>
+         <div class="boxSelectTop">
+             <a href="http://tieba.baidu.com/" class="OnTheTopLine">贴吧</a>
+         </div>
+         <div class="boxSelectTop">
+             <a href="https://haokan.baidu.com/?sfrom=baidu-top" class="OnTheTopLine">视频</a>
+         </div>
+         <div class="boxSelectTop">
+             <a href="http://image.baidu.com/" class="OnTheTopLine">图片</a>
+         </div>
+         <div class="boxSelectTop">
+             <a href="https://pan.baidu.com/?from=1026962h" class="OnTheTopLine">网盘</a>
+         </div>
+         <div class="boxSelectTop">
+             <a href="https://wenku.baidu.com/?fr=bdpcindex" class="OnTheTopLine">文库</a>
+         </div>
+         <div class="boxSelectTop">
+             <a href="https://chat.baidu.com/search?isShowHello=1&pd=csaitab&setype=csaitab&extParamsJson=%7B%22enter_type%22%3A%22home_tab%22%7D" class="OnTheTopLine">AI助手</a>
+         </div>
+         <div class="boxSelectTop">
+             <a href="http://www.baidu.com/more/" class="OnTheTopLine"> 更多</a>
+             <div class="more-tooltip">
+                <div class="more-tooltip-box">
+                    <img alt="翻译" class="more-img" src="https://pss.bdstatic.com/static/superman/img/topnav/newfanyi-da0cea8f7e.png">
+                    <a href="http://fanyi.baidu.com/">翻译</a>
+                </div>
+                <div class="more-tooltip-box">
+                    <img alt="学术"class="more-img" src="https://pss.bdstatic.com/static/superman/img/topnav/newxueshuicon-a5314d5c83.png">
+                    <a href="http://xueshu.baidu.com/">学术</a>
+                </div>
+                <div class="more-tooltip-box">
+                    <img alt="百科"class="more-img" src="https://pss.bdstatic.com/static/superman/img/topnav/newbaike-889054f349.png">
+                    <a href="https://baike.baidu.com/">百科</a>
+                </div>
+                <div class="more-tooltip-box">
+                    <img alt="知道" class="more-img" src="https://pss.bdstatic.com/static/superman/img/topnav/newzhidao-da1cf444b0.png">
+                    <a href="https://zhidao.baidu.com/">知道</a>
+                </div>
+                <div class="more-tooltip-box">
+                    <img alt="健康" class="more-img" src="https://pss.bdstatic.com/static/superman/img/topnav/newjiankang-f03b804b4b.png">
+                    <a href="https://jiankang.baidu.com/widescreen/home">健康</a>
+                </div>
+                <div class="more-tooltip-box">
+                    <img alt="营销手段" class="more-img" src="https://pss.bdstatic.com/static/superman/img/topnav/yingxiaoicon-612169cc36.png">
+                    <a href="http://e.baidu.com/ebaidu/home?refer=887">营销推广</a>
+                </div>
+                <div class="more-tooltip-box">
+                    <img alt="直播" class="more-img" src="https://pss.bdstatic.com/static/superman/img/topnav/newzhibo-a6a0831ecd.png">
+                    <a href="https://live.baidu.com/">直播</a>
+                </div>
+                <div class="more-tooltip-box">
+                    <img alt="音乐" class="more-img" src="https://pss.bdstatic.com/static/superman/img/topnav/newyinyue-03ecd1e9b9.png">
+                    <a href="http://music.taihe.com/">音乐</a>
+                </div>
+                <div class="more-tooltip-box">
+                    <img alt="橙篇" class="more-img" src="https://pss.bdstatic.com/static/superman/img/topnav/chengpian-9981cd1fdb.png">
+                    <a href="https://cp.baidu.com/?sa=bdindex">橙篇</a>
+                </div>
+                <p><p>
+                <div class="more-tooltip-box-bottom">
+                    <a href="http://www.baidu.com/more/">查看全部百度产品</a>
+                </div>   
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="ForRightTopSpecial" style="height: 38px;">
+            <div class="boxSelectTop" > 
+                <a href=""  class="OnTheTopLine">设置</a>
+            </div>
+            <div class="signin" >
+                <a href="https://passport.baidu.com/v2/?login&tpl=mn&u=http%3A%2F%2Fwww.baidu.com%2F&sms=5";>登录</a>
+            </div>
+        </div>    
+    </div>
+</div>
+<br>
+<br>
+<div style="text-align: center;" >
+    <img alt="baidu" src="baidu.png" style="height: 100%;width: 285px;"></img>
+</div>
+<div class="search-container">
+    <input type="text" class="search-input" id="search-query" >
+    <button class="search-button" onclick="searchBaidu()">百度一下</button>
+    <img src="camera.svg" alt="图片搜索" class="search-image-button">
+</div>
+
+<div class="bottom-box" >
+    <a href="https://home.baidu.com/">关于百度</a>
+    <a href="http://ir.baidu.com/">About Baidu</a>
+    <a href="https://www.baidu.com/duty">使用百度前必读</a>
+    <a href="https://help.baidu.com/question?prod_id=1">帮助中心</a>
+    <a href="https://e.baidu.com/?refer=1271">企业推广</a>
+    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002000001">京公网安备11000002000001号</a>
+    <a href="https://beian.miit.gov.cn/">京ICP证030173号</a>
+    <a class="no-hover">互联网新闻信息服务许可证11220180008</a>
+    <a class="no-hover">网络文化经营许可证： 京网文〔2023〕1034-029号</a>
+    <a href="https://www.baidu.com/licence/">信息网络传播视听节目许可证 0110516</a>
+    <img src="wheelchair_icon_172794.png" alt="轮椅"height="13px" width="13px">
+    <div class="arrow">
+         <img class="arrow-img" alt="箭头"src="up-arrow_icon-icons.com_73351.png">   
+         <div class="arrow-window">
+             <p>互联网宗教信息服务许可证编号：京（2022）0000043</p>
+             <p>药品医疗器械网络信息服务备案（京）网药械信息备字（2021）第00159号</p>
+             <p>医疗器械网络交易服务第三方平台备案凭证（京）网械平台备字（2020）第00002号</p>
+             <p>药品网络交易服务第三方平台备案凭证（京）网药平台备字〔2023〕第000002号</p>
+             <p>©2024 Baidu </p>
+         </div>
+    </div>
+</div>
+</body>
+</html>
